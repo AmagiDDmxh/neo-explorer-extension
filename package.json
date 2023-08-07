@@ -34,8 +34,7 @@
   },
   "manifest": {
     "host_permissions": [
-      "https://evm.ngd.network/address/*/*",
-      "*://20.121.119.48"
+      "https://evm.ngd.network/address/*/*"
     ]
   }
 }

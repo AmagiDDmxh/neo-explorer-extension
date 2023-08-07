@@ -1,33 +1,35 @@
-This is a [Plasmo extension](https://docs.plasmo.com/) project bootstrapped with [`plasmo init`](https://www.npmjs.com/package/plasmo).
+# Hackathon2023-GPT
 
-## Getting Started
+The code of the explorer exntension for NEO APAC Hachathon 2023 contest.
 
-First, run the development server:
+## News
 
-```bash
-pnpm dev
-# or
-npm run dev
-```
+- [We won the First Prize of Neo APAC Hackathon Tokyo!](https://twitter.com/0xKekkai/status/1683401599711068160?s=20)🎉🎉🎉
 
-Open your browser and load the appropriate development build. For example, if you are developing for the chrome browser, using manifest v3, use: `build/chrome-mv3-dev`.
+## About NEO APAC Hachathon 2023
 
-You can start editing the popup by modifying `popup.tsx`. It should auto-update as you make changes. To add an options page, simply add a `options.tsx` file to the root of the project, with a react component default exported. Likewise to add a content page, add a `content.ts` file to the root of the project, importing some module and do some logic, then reload the extension on your browser.
+- [Contest Website](https://hackathon.neo.org/)
 
-For further guidance, [visit our Documentation](https://docs.plasmo.com/)
+## Smart Contract Explorer Extension
 
-## Making production build
+We design a explorer extension to explain the smart contracts with reliability score assessment，which can aid the nonprofessional users to understand code and avoid risk. And it can also help developers to improve the security of smart contracts.
 
-Run the following:
+Detailed functions:
 
-```bash
-pnpm build
-# or
-npm run build
-```
+1. Display contract information and reliability score
+2. Display the transaction and vulnerability risks of the contract
+3. Display the explanation of the contract interface, including the working principle
 
-This should create a production bundle for your extension, ready to be zipped and published to the stores.
+<div style="margin-top: 1rem;">
+    <img src=".github/images/panels.png" alt="" style="" width="800px"/>
+</div>
+<div style="margin-top: 1rem;">
+  <img src=".github/images/contract-meanings.png" alt="" style="" width="800px"/>
+</div>
 
-## Submit to the webstores
+## See also
 
-The easiest way to deploy your Plasmo extension is to use the built-in [bpp](https://bpp.browser.market) GitHub action. Prior to using this action however, make sure to build your extension and upload the first version to the store to establish the basic credentials. Then, simply follow [this setup instruction](https://docs.plasmo.com/framework/workflows/submit) and you should be on your way for automated submission!
+- [Langchain: A framework for developing applications powered by LM](https://docs.langchain.com/docs/)
+- [Slither: A Static Analyzer for Solidity](https://github.com/crytic/slither)
+- [DREAD: A risk assessment model](https://en.wikipedia.org/wiki/DREAD_(risk_assessment_model))
+- [OpenAI platform](https://platform.openai.com/docs/introduction)

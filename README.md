@@ -21,10 +21,10 @@ Detailed functions:
 3. Display the explanation of the contract interface, including the working principle
 
 <div style="margin-top: 1rem;">
-    <img src=".github/images/panels.png" alt="" style="" width="800px"/>
+    <img src=".github/images/panels.png" alt="" style="" width="100%"/>
 </div>
 <div style="margin-top: 1rem;">
-  <img src=".github/images/contract-meanings.png" alt="" style="" width="800px"/>
+  <img src=".github/images/contract-meanings.png" alt="" style="" width="100%"/>
 </div>
 
 ## See also

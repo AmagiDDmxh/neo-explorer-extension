@@ -1,4 +1,4 @@
-# Hackathon2023-GPT
+# Hackathon2023-GPT-explorer-extension
 
 The code of the explorer exntension for NEO APAC Hachathon 2023 contest.
 

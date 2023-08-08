@@ -1,35 +1,22 @@
-# Hackathon2023-GPT-explorer-extension
+## Explorer Extension
 
-The code of the explorer exntension for NEO APAC Hachathon 2023 contest.
+Quick intro to KEKKAI Scan AI(Chat GPT) driven smart contract security assessment browser extension and function interpreter based on NEO block explorer
 
-## News
+![.github/images/quick-intro.png](.github/images/quick-intro.png)
 
-- [We won the First Prize of Neo APAC Hackathon Tokyo!](https://twitter.com/0xKekkai/status/1683401599711068160?s=20)🎉🎉🎉
+Core feature: Safety score Generating assessment of smart contract security by showing the score by analyzing contract backdoor/risk, vulnerabilities, and using DREAD model.
 
-## About NEO APAC Hachathon 2023
+![.github/images/core-feature-safety-score.png](.github/images/core-feature-safety-score.png)
 
-- [Contest Website](https://hackathon.neo.org/)
+Core feature: Risk detection Contract analysis provides information about dangerous content(honeypot, burn risk etc.) and vulnerability using KEKKAI API and slither.
 
-## Smart Contract Explorer Extension
+![.github/images/core-feature-risk-detection.png](.github/images/core-feature-risk-detection.png)
 
-We design a explorer extension to explain the smart contracts with reliability score assessment，which can aid the nonprofessional users to understand code and avoid risk. And it can also help developers to improve the security of smart contracts.
 
-Detailed functions:
+Core feature: Contract function interpreter
 
-1. Display contract information and reliability score
-2. Display the transaction and vulnerability risks of the contract
-3. Display the explanation of the contract interface, including the working principle
+![.github/images/core-feature-interpreter.png](.github/images/core-feature-interpreter.png)
 
-<div style="margin-top: 1rem;">
-    <img src=".github/images/panels.png" alt="" style="" width="100%"/>
-</div>
-<div style="margin-top: 1rem;">
-  <img src=".github/images/contract-meanings.png" alt="" style="" width="100%"/>
-</div>
+Core tech
 
-## See also
-
-- [Langchain: A framework for developing applications powered by LM](https://docs.langchain.com/docs/)
-- [Slither: A Static Analyzer for Solidity](https://github.com/crytic/slither)
-- [DREAD: A risk assessment model](https://en.wikipedia.org/wiki/DREAD_(risk_assessment_model))
-- [OpenAI platform](https://platform.openai.com/docs/introduction)
+![.github/images/core-tech.png](.github/images/core-tech.png)

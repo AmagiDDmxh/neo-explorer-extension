@@ -55,7 +55,7 @@ const fetchExplanation = async ({
         contract_content: contractContent,
         contract_address: contractAddress
       },
-      timeout: 1000 * 60 * 2
+      timeout: false
     })
     .json()) as { explanation: Explanation[] }
   return data?.explanation
@@ -76,7 +76,7 @@ const fetchVulnerability = async ({
         contract_content: contractContent,
         contract_address: contractAddress
       },
-      timeout: 1000 * 60 * 2
+      timeout: false
     })
     .json()) as { vulners: Vulnerability[] }
   return data?.vulners

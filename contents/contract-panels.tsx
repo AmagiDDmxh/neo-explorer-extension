@@ -12,7 +12,7 @@ import type {
   PlasmoGetInlineAnchor,
   PlasmoGetStyle
 } from "plasmo"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 import { sendToBackground } from "@plasmohq/messaging"
 import { useStorage } from "@plasmohq/storage/hook"
@@ -84,27 +84,39 @@ const DEMO_DATA = {
 
 const ContractPanels = () => {
   const [isLoading, setIsLoading] = useState(false)
-
-  const address = location.pathname
-    .replace("/address/", "")
-    .toLowerCase()
-    .trim()
+  const address = location.pathname.match(/0x[\d\w]{40}/)?.[0]?.toLowerCase()
 
   const [
     storageContractData,
     setStorageContractData,
-    { setRenderValue: setRenderStorageContractData, remove }
+    { setRenderValue: setRenderStorageContractData }
   ] = useStorage<Record<string, ContractData>>(
     "__kekkai_contract_data__",
     DEMO_DATA
   )
+  const currentContractData = storageContractData?.[address]
+  const isContractVerified = !!currentContractData?.explanation.length
+  const score = calculateScore(currentContractData?.vulnerability)
+  const alarms =
+    currentContractData?.vulnerability.filter((x) => x.score === 3).length ??
+    "-"
+  const warns =
+    currentContractData?.vulnerability.filter((x) => x.score === 2).length ??
+    "-"
+
+  const loadingRef = useRef(false)
+
+  const [isMounted, setIsMounted] = useState(false)
+  useEffect(() => setIsMounted(true), [])
+
   useEffect(() => {
-    if (!address) {
+    if (!address || currentContractData || loadingRef.current || !isMounted) {
       return
     }
 
     ;(async () => {
       setIsLoading(true)
+      loadingRef.current = true
       const contractData = (await sendToBackground({
         name: "contract",
         body: {
@@ -114,55 +126,62 @@ const ContractPanels = () => {
 
       if (!contractData) {
         setIsLoading(false)
+        loadingRef.current = false
         return
       }
 
-      if (
-        contractData.explanation.some((x) =>
-          x.content.toLowerCase().includes("error")
-        ) ||
-        contractData.vulnerability.some((x) =>
-          x.content.toLowerCase().includes("error")
-        )
-      ) {
-        return setRenderStorageContractData(DEMO_DATA)
-      }
       // comparing
-      setStorageContractData((xs) => {
-        const normalizedData = {
-          explanation: contractData.explanation
-            .map((x) => ({
-              ...x,
-              // Remove brackets tokens
-              func: x.func.replace(/\(.*\)/, "")
-            }))
-            // Remove private accessor that starts with '_'
-            .filter((x) => !x.func.startsWith("_")),
-          vulnerability: contractData.vulnerability.sort(
-            (a, b) => b.score - a.score
+      await setStorageContractData((xs) => {
+        let normalizedData;
+
+        if (
+          !contractData.explanation.some((x) =>
+            x.content.toLowerCase().includes("error")
           )
+        ) {
+          normalizedData = {
+            ...normalizedData,
+            explanation: contractData?.explanation
+              ?.map((x) => ({
+                ...x,
+                // Remove brackets tokens
+                func: x.func.replace(/\(.*\)/, "")
+              }))
+              // Remove private accessor that starts with '_'
+              ?.filter((x) => !x.func.startsWith("_"))
+          }
         }
 
-        return {
-          [address]: normalizedData
+        if (
+          !contractData.vulnerability.some((x) =>
+            x.content.toLowerCase().includes("error")
+          )
+        ) {
+          normalizedData = {
+            ...normalizedData,
+            vulnerability: contractData.vulnerability.sort(
+              (a, b) => b.score - a.score
+            )
+          }
+        }
+
+        if (normalizedData) {
+          const data = {
+            ...xs,
+            [address]: normalizedData
+          }
+  
+          return data
         }
       })
       setIsLoading(false)
+      loadingRef.current = false
     })()
-  }, [address])
+  }, [address, currentContractData])
 
-  const currentContractData = isLoading ? null : storageContractData?.[address]
-  const isContractVerified = !!currentContractData?.explanation.length
-  const score = calculateScore(currentContractData?.vulnerability)
-  const alarms =
-    currentContractData?.vulnerability.filter((x) => x.score === 3).length ??
-    "-"
-  const warns =
-    currentContractData?.vulnerability.filter((x) => x.score === 2).length ??
-    "-"
-  const hasNoData =
-    !currentContractData?.explanation.length &&
-    !currentContractData?.vulnerability.length
+  // const hasNoData =
+  //   !currentContractData?.explanation.length &&
+  //   !currentContractData?.vulnerability.length
 
   return (
     <div className="kekkai-flex kekkai-flex-wrap kekkai-min-w-full">

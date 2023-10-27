@@ -3,7 +3,7 @@
   "displayName": "Kekkai Extension",
   "version": "0.0.1",
   "description": "Extension to keep track of contract status and analysis",
-  "author": "null",
+  "author": "Kekkai Team",
   "scripts": {
     "dev": "plasmo dev",
     "build": "plasmo build",
